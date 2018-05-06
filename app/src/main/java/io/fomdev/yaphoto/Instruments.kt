@@ -91,9 +91,9 @@ class Instruments {
                 override fun onSuccess() {
                     loadingPanel.visibility = View.GONE
                     imageView.visibility = View.VISIBLE
-                    shareItem.setEnabled(true)
-                    saveItem.setEnabled(true)
-                    deleteItem.setEnabled(true)
+                    shareItem.isEnabled = true
+                    saveItem.isEnabled = true
+                    deleteItem.isEnabled = true
 
                     shareItem.setIcon(R.drawable.ic_share_black_24dp)
                     saveItem.setIcon(R.drawable.ic_save_black_24dp)
@@ -116,10 +116,7 @@ class Instruments {
 
             Data.pathsOfSavedPhotos.remove(pathOfSavedImage)
 
-            Data.editor.remove(Data.APP_PREFERENCES_SAVED_IMAGES)
-            Data.editor.apply()
-            Data.editor.putStringSet(Data.APP_PREFERENCES_SAVED_IMAGES, Data.pathsOfSavedPhotos)
-            Data.editor.apply()
+            savePathsOfSavedImagesToSharedPrefs()
 
             if (Data.currentAdapter == Data.SAVED_PHOTOS) {
                 //Если мы в разделе сохраненных, то обновляем список изображений в адаптере
@@ -138,6 +135,28 @@ class Instruments {
                 }
             }
         }
+
+        fun getPathsOfSavedImagesFromSharedPrefs(){
+            //Получение массива путей до сохраненных файлов в SharedPref
+            Data.pathsOfSavedPhotos.clear()
+            val size = Data.infoAboutUser!!.getInt("Array_size", 0)
+            for (i in 0 until size) {
+                Data.pathsOfSavedPhotos.add(Data.infoAboutUser!!.getString("Array_$i", null))
+            }
+        }
+
+        fun savePathsOfSavedImagesToSharedPrefs(){
+            //Сохранение массива путей до сохраненных файлов в SharedPref
+            Data.editor.putInt("Array_size", Data.pathsOfSavedPhotos.size)
+
+            for (i in 0 until Data.pathsOfSavedPhotos.size) {
+                Data.editor.remove("Array_$i")
+                Data.editor.putString("Array_$i", Data.pathsOfSavedPhotos.get(i))
+            }
+            Data.editor.apply()
+            //
+        }
+
 
         fun getFileNameFromString(path: String): String {
             var cut = path.lastIndexOf('/')
@@ -179,10 +198,7 @@ class Instruments {
 
                 Data.pathsOfSavedPhotos.add(Data.PATH_TO_IMAGES.toString() + fname)
 
-                Data.editor.remove(Data.APP_PREFERENCES_SAVED_IMAGES)
-                Data.editor.apply()
-                Data.editor.putStringSet(Data.APP_PREFERENCES_SAVED_IMAGES, Data.pathsOfSavedPhotos)
-                Data.editor.apply()
+                savePathsOfSavedImagesToSharedPrefs()
 
                 Data.PATH_TO_IMAGES.mkdirs()
 

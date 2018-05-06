@@ -9,7 +9,7 @@
     <string name="first_image_desc">first image in cardview</string>
     <string name="second_image_desc">second image in cardview</string>
     <string name="cat_saved">Котик сохранен</string>
-    <string name="cat_deleted">Котик сохранен</string>
+    <string name="cat_deleted">Котик удален</string>
     <string name="cat">Котик</string>
     <string name="loading">Загружаю…</string>
     <string name="net_error_on_button">Нет соединения! Обновить?</string>

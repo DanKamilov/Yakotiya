@@ -20,7 +20,9 @@ import android.view.View
 import io.fomdev.yaphoto.Instruments.Companion.fillImagesUrlsList
 import io.fomdev.yaphoto.Instruments.Companion.getFileNameFromString
 import io.fomdev.yaphoto.Instruments.Companion.getFileNameFromUri
+import io.fomdev.yaphoto.Instruments.Companion.getPathsOfSavedImagesFromSharedPrefs
 import io.fomdev.yaphoto.Instruments.Companion.saveImageToThePhoneStorage
+import io.fomdev.yaphoto.Instruments.Companion.savePathsOfSavedImagesToSharedPrefs
 import io.fomdev.yaphoto.Instruments.Companion.toast
 import io.fomdev.yaphoto.Instruments.Companion.verifyStoragePermissions
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,7 +31,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.photos_fragment.*
 import java.io.File
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -166,11 +167,9 @@ class MainActivity : AppCompatActivity() {
 
             Data.imagesList.clear()
             //получаем пути сохр.картинок из SharedPrefs
-            if (Data.infoAboutUser!!.contains(Data.APP_PREFERENCES_SAVED_IMAGES)) {
-                Data.pathsOfSavedPhotos = Data.infoAboutUser!!
-                        .getStringSet(
-                                Data.APP_PREFERENCES_SAVED_IMAGES,
-                                HashSet<String>()) as HashSet<String>
+            if (Data.infoAboutUser!!.contains("Array_size")) {
+
+                getPathsOfSavedImagesFromSharedPrefs()
 
                 for (pathToSavedImage in Data.pathsOfSavedPhotos) {
                     //чистим массив сохраненных картинок,
@@ -180,11 +179,7 @@ class MainActivity : AppCompatActivity() {
                         Data.pathsOfSavedPhotos.remove(pathToSavedImage)
                 }
 
-                Data.editor.remove(Data.APP_PREFERENCES_SAVED_IMAGES)//обновляем данные в sharedPrefs
-                Data.editor.apply()
-                Data.editor.putStringSet(Data.APP_PREFERENCES_SAVED_IMAGES, Data.pathsOfSavedPhotos)
-                Data.editor.apply()
-
+                savePathsOfSavedImagesToSharedPrefs()
 
                 for (pathToSavedImage in Data.pathsOfSavedPhotos) {//заполняем массив для адаптера
                     val fileName = getFileNameFromString(pathToSavedImage)

@@ -17,7 +17,7 @@ class Data {
         var cachedLinksOfImages: ArrayList<CatImage> = ArrayList()
         var screenWidth: Int = 0
         var currentPage: Int = 1
-        var pathsOfSavedPhotos: HashSet<String> = HashSet()
+        var pathsOfSavedPhotos: ArrayList<String> = ArrayList()
         var currentAdapter: Int = LIST_FROM_INTERNET
 
         val editor by lazy {
