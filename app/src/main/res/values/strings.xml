@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Якотия</string>
+    <string name="title_activity_full_photo">FullPhotoActivity</string>
+    <string name="want_more">Хочу еще!</string>
+    <string name="net_error">Нет соединения</string>
+    <string name="net_hint">Потяни вниз, чтобы обновить</string>
+    <string name="list_of_images">Лента</string>
+    <string name="saved_images">Сохранённые</string>
+    <string name="first_image_desc">first image in cardview</string>
+    <string name="second_image_desc">second image in cardview</string>
+    <string name="cat_saved">Котик сохранен</string>
+    <string name="cat_deleted">Котик сохранен</string>
+    <string name="cat">Котик</string>
+    <string name="loading">Загружаю…</string>
+    <string name="net_error_on_button">Нет соединения! Обновить?</string>
+    <string name="cats_ends">Котики кончились!</string>
+</resources>

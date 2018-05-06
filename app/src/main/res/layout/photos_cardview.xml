@@ -1,0 +1,60 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="io.fomdev.yaphoto.MainActivityFragment">
+
+    <LinearLayout
+        android:id="@+id/LLmenuElement"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout android:id="@+id/loadingPanel1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="10dp"
+            android:gravity="center">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:id="@+id/progressBar1" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/first_photo"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:contentDescription="@string/first_image_desc"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout android:id="@+id/loadingPanel2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="10dp"
+            android:gravity="center">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:id="@+id/progressBar2" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/second_photo"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:layout_height="10dp"
+            android:contentDescription="@string/second_image_desc"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
